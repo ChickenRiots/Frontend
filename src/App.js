@@ -5,27 +5,21 @@ import { TimelineMax } from "gsap/all";
 import { Timeline } from "react-gsap";
 import { Tween } from "react-gsap";
 
-
-function App() {
-
-  let tl = new TimelineMax();
-
-  useEffect(() => {
-    //focus on main element for hotkey
-    tl.fromTo()
-  }, []);
+import MultipleElements from "./testMultiple"
 
 
+function App() {  
   return (
     <div className="App">
         <h1 class="header layer_one">Chicken Riot</h1>
         <h1 class="header layer_two">Chicken Riot</h1>
-        <Timeline target={ <div class="chicken">🐔</div>}>
+        {/* <Timeline target={ <div class="chicken">🐔</div>}>
     
-          <Tween from={{opacity: 0}} to={{opacity: 1}}>
+          <Tween from={{opacity: 0, x:"-7500px"}} to={{x:0, opacity: 1}}>
            
           </Tween>
-        </Timeline>
+        </Timeline> */}
+        <MultipleElements />
         <div>
           <input class="text_input" placeholder="room id" type="text"></input>
           <input class="room_submit" type="submit" value="join"></input>

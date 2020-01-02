@@ -42,3 +42,10 @@
 .room_submit{
   font-size: 48px;
 }
+
+.card-element{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
