@@ -23,19 +23,20 @@ useEffect(() => {
   socketio.emit('room', 'new room')
   socketio.on('client connected', data => setUserData({data}) )
   socketio.on('animate', data => setAnimate([...Animate, data]))
+
+  //socketio.emit('animate', UserID, 'Type of animation')
 }, [])
 
-useEffect(() => {
-  // select the most recent animation in the list and animate the referenced div. 
-},[Animate])
 console.log(UserData)
 return (
     <div className="App">
+
       <div className="theater"> 
         <Theater />
       </div>
+      
       <div className="chat">
-        <Chat  socketio={socketio}/>
+        <Chat socketio={socketio}/>
       </div>
     </div>
   );
