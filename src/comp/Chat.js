@@ -1,6 +1,14 @@
-import React , {useState, useEffect} from 'react'
+import React , {useState, useEffect} from 'react';
+
+import './chat.css'
+
+import nameList from './nameList'
 
 export default function Chat(props) {
+
+    //CREATES USERS NAME
+    const randomName =  nameList[Math.floor(Math.random() * nameList.length)]
+    const [Username, setUsername] = useState(randomName)
 
     const room = 'bear'
 
@@ -39,14 +47,20 @@ export default function Chat(props) {
             alert('Please enter a message!'); 
             return null;
         }
-        props.socketio.emit('chat message', room , 'username', Input );
+        props.socketio.emit('chat message',  Username, Input , room );
         setInput('');
     }
 
+    const handleUsername = (e) =>{
+        e.preventDefault();
+        setUsername(e.target.value)
+    }
+
     return (
-    <div>
-{Messages === null || Messages === undefined ? null : Messages.map((message, i) => <ul key={i}>{message}</ul>)}<br/>
-        ....
+    <div className="chat-box" >
+        <div className="messages">
+        {Messages === null || Messages === undefined ? null : Messages.map((message, i) => <ul key={i}>{message}</ul>)}<br/>
+        </div>....
         <form id="form" onSubmit={e => handleSubmit(e)}>
             <input
                 placeholder="Send a message..." 
@@ -54,7 +68,13 @@ export default function Chat(props) {
                 value={Input}
                 onChange={e => handleChange(e)}></input>
             <button type="button" onClick={e => handleSubmit(e)}>send</button>
-        </form>
+        </form><br/>
+        <label>Username</label><br/>
+        <input
+            placeholder={Username}
+            name="username"
+            value={Username}
+            onChange={e => handleUsername(e)} />
     </div>
     )
 }

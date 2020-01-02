@@ -7,6 +7,7 @@ import testAvatar from "./images/testAvatar.png";
 import io from 'socket.io-client';
 
 import Chat from './comp/Chat'
+import Theater from './comp/Theater';
 // https://chickenriot.herokuapp.com/ https://superchatt.herokuapp.com/
 let socketio = io('https://chickenriot.herokuapp.com/');
 
@@ -28,15 +29,16 @@ useEffect(() => {
   // select the most recent animation in the list and animate the referenced div. 
 },[Animate])
 console.log(UserData)
-  
-  return (
-      <div className="App">
-        <Chat socketio={socketio}/>
-          {UserData.data ? UserData.data.map((id, index) => (
-          <img src={testAvatar} key={id}/>
-        )) : null}
+return (
+    <div className="App">
+      <div className="theater"> 
+        <Theater />
       </div>
-    );
+      <div className="chat">
+        <Chat  socketio={socketio}/>
+      </div>
+    </div>
+  );
 }
 
 export default App;
