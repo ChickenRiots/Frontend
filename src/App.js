@@ -6,7 +6,7 @@ import io from 'socket.io-client';
 
 import Chat from './comp/Chat'
 // https://chickenriot.herokuapp.com/ https://superchatt.herokuapp.com/
-let socketio = io('https://superchatt.herokuapp.com/');
+let socketio = io('https://chickenriot.herokuapp.com/');
 
 function App() {
 
