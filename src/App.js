@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
+
 import './App.css';
 
+import io from 'socket.io-client';
+
+import Chat from './comp/Chat'
+// https://chickenriot.herokuapp.com/ https://superchatt.herokuapp.com/
+let socketio = io('https://superchatt.herokuapp.com/');
+
 function App() {
-  return (
+
+  //user data
+const [UserData, setUserData] = useState({});
+
+useEffect(() => {
+  socketio.emit('client connected');
+  // create random room function later
+  socketio.emit('room', 'new room')
+  socketio.on('client connected', data => setUserData(data) )
+}, [])
+
+console.log(UserData)
+return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Chat  socketio={socketio}/>
     </div>
   );
 }
