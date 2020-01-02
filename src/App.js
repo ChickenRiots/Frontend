@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import './App.css';
 import { TimelineMax } from "gsap/all";
-
+import testAvatar from "./images/testAvatar.png";
 
 import io from 'socket.io-client';
 
@@ -19,15 +19,19 @@ useEffect(() => {
   socketio.emit('client connected');
   // create random room function later
   socketio.emit('room', 'new room')
-  socketio.on('client connected', data => setUserData(data) )
+  socketio.on('client connected', data => setUserData({data}) )
 }, [])
 
 console.log(UserData)
-return (
-    <div className="App">
-      <Chat socketio={socketio}/>
-    </div>
-  );
+  
+  return (
+      <div className="App">
+        <Chat socketio={socketio}/>
+          {UserData.data ? UserData.data.map((id, index) => (
+          <img src={testAvatar} key={id}/>
+        )) : null}
+      </div>
+    );
 }
 
 export default App;
