@@ -2,6 +2,8 @@ import React , {useState, useEffect} from 'react'
 
 export default function Chat(props) {
 
+    const room = 'bear'
+
     const [Typing, setTyping] = useState(false)
 
     const [Messages, setMessages] = useState([])
@@ -37,7 +39,7 @@ export default function Chat(props) {
             alert('Please enter a message!'); 
             return null;
         }
-        props.socketio.emit('chat message', 'username', Input );
+        props.socketio.emit('chat message', room , 'username', Input );
         setInput('');
     }
 
