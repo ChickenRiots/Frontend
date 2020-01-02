@@ -14,14 +14,19 @@ function App() {
 
   //user data
 const [UserData, setUserData] = useState({});
+const [Animate, setAnimate] = useState([]);
 
 useEffect(() => {
   socketio.emit('client connected');
   // create random room function later
   socketio.emit('room', 'new room')
   socketio.on('client connected', data => setUserData({data}) )
+  socketio.on('animate', data => setAnimate([...Animate, data]))
 }, [])
 
+useEffect(() => {
+  // select the most recent animation in the list and animate the referenced div. 
+},[Animate])
 console.log(UserData)
   
   return (
