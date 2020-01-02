@@ -1,0 +1,10 @@
+.messages{
+    color: white;
+    border: 2px solid red;
+    margin: 0 auto;
+    background-color: black;
+    height: 70vh;
+    width: 24vw;
+    text-align: left;
+    font-size: 90%;
+}

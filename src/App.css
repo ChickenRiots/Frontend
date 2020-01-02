@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: space-around;
 }
 
 .App-logo {
@@ -35,4 +37,17 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.chat{
+  width: 40vw;
+  display: flex;
+  margin-top: 2%;
+  align-content: flex-end;
+}
+
+.theater{
+  width: 110vw;
+  margin: 2%;
+  border: wheat 1px solid;
 }
