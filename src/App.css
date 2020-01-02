@@ -42,3 +42,12 @@
 .room_submit{
   font-size: 48px;
 }
+img{
+
+  transform: translateX(840px);
+  opacity: 1;
+  /* visibility: hidden; */
+  display: inline-block;
+  margin-bottom: 80px;
+  
+}

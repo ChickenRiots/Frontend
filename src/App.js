@@ -1,34 +1,36 @@
 import React, { useState, useEffect, useRef } from "react";
 import logo from './logo.svg';
 import './App.css';
-import { TimelineMax } from "gsap/all";
-import { Timeline } from "react-gsap";
-import { Tween } from "react-gsap";
+import { TweenLite, SlowMo } from "gsap/all";
+import ChickenImage from "./components/ChickenImage";
+
 
 
 function App() {
+    let myRef = React.createRef();
+    let titleTween = null;
 
-  let tl = new TimelineMax();
-
-  useEffect(() => {
-    //focus on main element for hotkey
-    tl.fromTo()
-  }, []);
-
+  
+  useEffect(()=>{
+    console.log(myRef.current);
+    titleTween = TweenLite.from(myRef.current, 1, {
+    x: 500, autoAlpha: 1, ease:SlowMo.ease, paused: true
+  });
+  titleTween.play( !titleTween.play() );
+ }, [])
 
   return (
     <div className="App">
-        <h1 class="header layer_one">Chicken Riot</h1>
-        <h1 class="header layer_two">Chicken Riot</h1>
-        <Timeline target={ <div class="chicken">🐔</div>}>
-    
-          <Tween from={{opacity: 0}} to={{opacity: 1}}>
-           
-          </Tween>
-        </Timeline>
+      <ChickenImage ref={myRef} />
+      
+        <h1 className="header layer_one">Chicken Riot</h1>
+        <h1 className="header layer_two">Chicken Riot</h1>
+        {/* <div className="chicken"  >🐔</div> */}
         <div>
-          <input class="text_input" placeholder="room id" type="text"></input>
-          <input class="room_submit" type="submit" value="join"></input>
+          <input className="text_input" placeholder="room id" type="text"></input>
+
+
+          <input className="room_submit" type="submit" value="join"></input>
         </div>
     </div>
   );
