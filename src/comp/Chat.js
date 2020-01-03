@@ -63,8 +63,13 @@ export default function Chat(props) {
     <div className="chat-box" >
             <img src={Riot} alt="Chicken Riot Logo" className="logo" />
         <div className="messages">
-        {Messages === null || Messages === undefined || Messages.length === 0 ? <p className="txt-message">Yell something! </p>
-        : Messages.map((message, i) => <p className="txt-message" key={i}> <span className="usr-chat-name">{message.split(':')[0]}</span> | {message.split(':')[1]}</p>)}<br/>
+            <div className="inner-text-box">
+            {Messages === null || Messages === undefined || Messages.length === 0 ? 
+                <p className="txt-message">Welcome to chat! Please Leave a message. </p>
+                : Messages.map((message, i) => 
+                    <p className="txt-message" key={i}> 
+                        <span className="usr-chat-name">{message.split(':')[0]}</span> | {message.split(':')[1]}</p>)} </div>
+                        <br/>
         </div>
             <label >Username</label><br/>
             <input

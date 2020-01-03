@@ -1,11 +1,11 @@
 .messages{
     color: rgb(0, 0, 0);
-    border-top:8px solid #ff0040;
-    border-right:8px solid #ff0040;
-    border-bottom:8px double #ff0040;
-    border-left:8px double #ff0040;
+    border-top:8px solid #9A2D18;
+    border-right:8px solid #9A2D18;
+    border-bottom:8px double rgb(81, 25, 13);
+    border-left:8px double rgb(57, 36, 9);
     margin: 0 auto;
-    background-color: rgba(0, 0, 0, 0.394);
+    background-color: #bfb1ad;
     height: 70vh;
     width: 24vw;
     text-align: left;
@@ -13,6 +13,14 @@
     padding-top: ;
     padding: 10% 5% 0 5%;
     line-height: .9;
+}
+
+.inner-text-box{
+    background-color: white;
+    height: 90%;
+    width: 90%;
+    padding: 5px;
+    border: black 2px solid;
 }
 
 .logo{
