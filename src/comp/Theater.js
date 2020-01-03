@@ -3,22 +3,15 @@ import React from 'react';
 
 
 class YouTubeVideo extends React.PureComponent {
-  static propTypes = {
-    id: PropTypes.string.isRequired,
-  };
 
   constructor(props){
     super(props);
     this.state = {
       url: ''
     }
-  }
-
+  }  
   
   componentDidMount = () => {
-    this.props.socketio.on('iframe', data => {
-      this.setState({url: data})
-    })
 
     // On mount, check to see if the API script is already loaded
 
@@ -36,19 +29,34 @@ class YouTubeVideo extends React.PureComponent {
       this.loadVideo();
     }
   };
+
+  componentWillMount = () =>{
+    this.props.socketio.on('iframe', data => {
+      this.getURL(data).then(res => this.setState({url: res}))
+      .catch(error => console.log(error))
+    })
+  }
   
+  getURL(url){
+    return new Promise((resolve) =>{
+      resolve(url)
+    })
+  }
+
   loadVideo = () => {
     const { id } = this.props;
     
-    // the Player object is created uniquely based on the id in props
-    this.player = new window.YT.Player(`youtube-player-${id}`, {
-      videoId: this.state.url,
-      events: {
-        onReady: this.onPlayerReady,
-      },
-    });
+      // the Player object is created uniquely based on the id in props
+
+      this.player = new window.YT.Player(`youtube-player-${id}`, {
+        videoId: this.state.url ,
+        events: {
+          onReady: this.onPlayerReady,
+        },
+      });
   };
   
+
   onPlayerReady = event => {
     event.target.playVideo();
   };

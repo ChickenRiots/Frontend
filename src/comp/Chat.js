@@ -33,7 +33,7 @@ export default function Chat(props) {
             console.log(Messages);
         })
    
-    })
+    }, [Messages])
 
     const handleChange = (e) =>{
         e.preventDefault();
