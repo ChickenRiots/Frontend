@@ -49,7 +49,7 @@ function App() {
     
     console.log('link, sink', Link , SyncedV.toString());
     
-    setLink(SyncedV)
+    setLink(SyncedV.toString())
 
     handleSubmit(e);
   }
@@ -71,13 +71,15 @@ useEffect(() => {
 if(Searched){
 return (
   <>
-    <form onSubmit={e => handleSubmit(e)}>
+    <form onSubmit={e => handleSubmit(e)} className="searchbar" >
     <input
+    className="search-input"
         placeholder="paste a link here to start sharing!"
         name="links"
         onChange={e => handleChange(e)} 
         />
       <button onSubmit={e => handleSubmit(e)}> Search </button>
+      <button onClick={e => SyncHandle(e)} disabled="true"> sync </button>
     </form>
     <div className="App">
       {Link != undefined &&  Link.includes('youtube')  ?
@@ -87,8 +89,7 @@ return (
       <iframe crossorigin="anonymous" className="frame" src={Link}></iframe>}
 
       <div className="chat">
-        {/* <Chat  socketio={socketio}/> */}
-        <button onClick={e => SyncHandle(e)}> sync </button>
+        <Chat  socketio={socketio}/>
       </div>
           </div>
       {UserData ? <Seating socketio={socketio} users={UserData} userId={UserId}/> : <div>loading</div>
@@ -98,19 +99,20 @@ return (
   )}else{
     return(
        <>
-    <form onSubmit={e => handleSubmit(e)}>
+    <form onSubmit={e => handleSubmit(e)} className="searchbar" >
     <input
+    className="search-input"
         placeholder="paste a link here to start sharing!"
         name="links"
         onChange={e => handleChange(e)} 
         />
       <button onSubmit={e => handleSubmit(e)}> Search </button>
+      <button onClick={e => SyncHandle(e)} disabled="true"> sync </button>
     </form>
     <div className="App">
       <iframe crossorigin="anonymous" className="frame" src={Link}></iframe>
       <div className="chat">
-        {/* <Chat  socketio={socketio}/> */}
-        <button onClick={e => SyncHandle(e)}> sync </button>
+        <Chat  socketio={socketio}/>
       </div>
       
     </div>

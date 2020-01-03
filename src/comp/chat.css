@@ -1,12 +1,58 @@
 .messages{
-    color: white;
-    border: 2px solid red;
+    color: rgb(0, 0, 0);
+    border-top:8px solid #ff0040;
+    border-right:8px solid #ff0040;
+    border-bottom:8px double #ff0040;
+    border-left:8px double #ff0040;
     margin: 0 auto;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.394);
     height: 70vh;
     width: 24vw;
     text-align: left;
     font-size: 90%;
-    padding: 1%;
-    line-height: .5;
+    padding-top: ;
+    padding: 10% 5% 0 5%;
+    line-height: .9;
 }
+
+.logo{
+    max-width: 26vw;
+    margin: -8%;
+
+}
+
+.txt-message{
+    font-weight: 600;
+}
+
+.send-button{
+    color: white;
+    background-color: darkblue;
+    margin: 5px;
+    padding: 2px;
+    width: 2vw;
+    font-weight: 900;
+}
+
+label{
+    font-weight: 700;
+}
+
+.mess-input{
+    width: 18vw;
+    height: 2vh;
+    justify-content: left;
+}
+
+.user-input{
+    color: white;
+    background-color: black;
+    width: 18vw;
+    height: 2vh;
+    padding: 4px;
+}
+
+.usr-chat-name{
+    color: blue;
+}
+
