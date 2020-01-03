@@ -16,7 +16,10 @@ function App() {
   const [Link, setLink] = useState('')
 
   //user data
-  const [UserData, setUserData] = useState({});
+  const [UserData, setUserData] = useState();
+
+  //user id
+  const [UserId, setUserId] = useState();
 
   //bool
   const [Searched, setSearched] = useState(false)
@@ -37,11 +40,12 @@ useEffect(() => {
   socketio.emit('client connected');
   // create random room function later
   socketio.emit('room', 'new room')
-  socketio.on('client connected', data => setUserData(data) )
+
+  socketio.on('client connected', data => setUserData(data))
+  socketio.on('userId', data => setUserId(data))
 }, [])
 
-console.log(UserData)
-
+console.log(UserId)
 if(Searched){
 return (
   <>
@@ -63,9 +67,10 @@ return (
       <div className="chat">
         <Chat socketio={socketio}/>
       </div>
-
-    </div>
-      <Seating socketio={socketio} users={UserData}/>
+          </div>
+      {UserData ? <Seating socketio={socketio} users={UserData} userId={UserId}/> : <div>loading</div>
+      }
+      
   </>
   )}else{
     return(
@@ -83,7 +88,10 @@ return (
       <div className="chat">
         <Chat  socketio={socketio}/>
       </div>
+      
     </div>
+    {UserData ? <Seating socketio={socketio} users={UserData} userId={UserId}/> : <div>loading</div>
+      }
   </>
     )
   }
