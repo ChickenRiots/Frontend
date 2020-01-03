@@ -20,6 +20,9 @@ function App() {
   //bool
   const [Searched, setSearched] = useState(false)
 
+  // synced video
+  const [SyncedV, setSyncedV] = useState([])
+
   //link submission functions
   const handleChange = e =>{
     e.preventDefault();
@@ -29,7 +32,14 @@ function App() {
   const handleSubmit = e =>{
     e.preventDefault();
     socketio.emit( 'iframe' ,  Link);
+    // when serach is submitted then the html decided if its youtube or not
     setSearched(true)
+  }
+
+  const SyncHandle= e =>{
+    e.preventDefault();
+    setSearched(true);
+    console.log('link, sink',Link, SyncedV)
   }
 
 useEffect(() => {
@@ -37,6 +47,9 @@ useEffect(() => {
   // create random room function later
   socketio.emit('room', 'new room')
   socketio.on('client connected', data => setUserData(data) )
+  socketio.on('sync', syncVideo =>{
+    setSyncedV(syncVideo)
+  })
 }, [])
 
 console.log(UserData)
@@ -61,6 +74,7 @@ return (
 
       <div className="chat">
         <Chat  socketio={socketio}/>
+        <button onClick={e => SyncHandle(e)}> sync </button>
       </div>
     </div>
   </>
@@ -79,6 +93,7 @@ return (
       <iframe crossorigin="anonymous" className="frame" src={Link}></iframe>
       <div className="chat">
         <Chat  socketio={socketio}/>
+        <button onClick={e => SyncHandle(e)}> sync </button>
       </div>
     </div>
   </>
