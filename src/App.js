@@ -87,7 +87,7 @@ return (
       <iframe crossorigin="anonymous" className="frame" src={Link}></iframe>}
 
       <div className="chat">
-        <Chat  socketio={socketio}/>
+        {/* <Chat  socketio={socketio}/> */}
         <button onClick={e => SyncHandle(e)}> sync </button>
       </div>
           </div>
@@ -109,7 +109,7 @@ return (
     <div className="App">
       <iframe crossorigin="anonymous" className="frame" src={Link}></iframe>
       <div className="chat">
-        <Chat  socketio={socketio}/>
+        {/* <Chat  socketio={socketio}/> */}
         <button onClick={e => SyncHandle(e)}> sync </button>
       </div>
       

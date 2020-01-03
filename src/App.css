@@ -50,17 +50,29 @@
 .theater{
   width: 110vw;
   margin: 2%;
-  border: wheat 1px solid;
+
 }
 
 .icon{
   z-index: 55;
 }
 
+.icon-box{
+  position: fixed;
+  width: 55vw;
+  display: flex;
+  justify-content: center;
+  bottom: 0;
+  background: black;
+  padding: 5px 0;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
 .frame{
   width: 110vw;
   margin: 2%;
-  border: wheat 1px solid;
+  border: wheat 0px solid;
 }
 
 .textParagraph{
@@ -71,10 +83,13 @@
 }
 
 .seats{
-  width: 100%;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
 }
 
 .seatChart{
+  height: 35vh;
   position: fixed;
   bottom: 0;
   width: 50vw;
@@ -87,6 +102,26 @@
 }
 
 .avatar{
-  width: 20%;
+  display: flex;
 
+}
+
+.avatarImage{
+  position: relative;
+  bottom: 0;
+}
+
+.fistImage{
+  z-index: -1;
+  width: 50px;
+  margin-left: -30px;
+  transform: rotate(15deg);
+  opacity: 0;
+}
+
+.peaceImage{
+  width: 50px;
+  margin-right: -30px;
+  transform: rotate(15deg);
+  opacity: 0;
 }
