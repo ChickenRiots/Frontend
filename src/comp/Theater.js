@@ -34,7 +34,6 @@ class YouTubeVideo extends React.PureComponent {
       }
     })
   };
-
   
   loadVideo = (url) => {
     const { id } = this.props;
@@ -42,7 +41,6 @@ class YouTubeVideo extends React.PureComponent {
     // const url = this.state.url
     // console.log(url)
     setTimeout(()=>{
-      console.log(url)
       url !== undefined ? 
         this.player = new window.YT.Player(`youtube-player-${id}`, {
           videoId: url ,
