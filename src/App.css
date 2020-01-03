@@ -53,8 +53,40 @@
   border: wheat 1px solid;
 }
 
+.icon{
+  z-index: 55;
+}
+
 .frame{
   width: 110vw;
   margin: 2%;
   border: wheat 1px solid;
+}
+
+.textParagraph{
+  font-size: 48px;
+  font-weight: bold;
+  color: red;
+  position: relative;
+}
+
+.seats{
+  width: 100%;
+}
+
+.seatChart{
+  position: fixed;
+  bottom: 0;
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: row;
+  flex-wrap: wrap;
+  z-index: -1;
+}
+
+.avatar{
+  width: 20%;
+
 }

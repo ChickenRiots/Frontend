@@ -6,6 +6,7 @@ export default function Seating(props) {
     const [Users, setUsers] = useState()
     const [Animate, setAnimate] = useState([])
     const cards = []
+    const textFields = []
 
     useEffect(() => {
         // listen for message
@@ -17,13 +18,21 @@ export default function Seating(props) {
     })
 
     useEffect(() => {
-        cards.map(card => {
-            console.log(card[0])
+        cards.map((card, index) => {
+            console.log(Animate)
             if(card[0] === Animate.id){
                 let tl = new TimelineLite()
-                tl.fromTo(card[1], 4, {x: 0}, {x: 50, onComplete: function(){
-                    tl.clear()
-                }})
+                if(Animate.type.type === "emoji"){
+                    tl.fromTo(card[1], 0.25, {y: 0}, {y: 10, repeat:15, onComplete: function(){
+                        tl.clear()
+                    }})
+                } else if(Animate.type.type === "text") {
+                    textFields[index][1].textContent = Animate.type.value
+                    tl.fromTo(textFields[index][1], 1, {y: 0, opacity: 0}, {opacity: 1, y: -175, onComplete: function(){
+                        tl.clear()
+                    }})
+                    tl.to(textFields[index][1], 1, {opacity: 0})
+                }
                 
             }
         })
@@ -31,7 +40,12 @@ export default function Seating(props) {
 
     const click = (e) =>{
         e.preventDefault();
-        props.socketio.emit('animate', props.userId, "fire");
+        props.socketio.emit('animate', props.userId, {type:"emoji", value: "🔥"});
+    }
+
+    const click2 = (e) =>{
+        e.preventDefault();
+        props.socketio.emit('animate', props.userId, {type:"text", value: "Hi hi"});
     }
 
     console.log(Animate)
@@ -41,20 +55,24 @@ export default function Seating(props) {
         <div className="seats">
             
             <div className="icon-box" >
-                <input onClick={click} type="submit" value="🔥"/>
+                <input className="icon" onClick={click} type="submit" value="🔥"/>
+                <input className="icon"onClick={click2} type="submit" value="Hi hi"/>
             </div>
+            
+            <div className="seatChart">
 
-             {// map through the elements
-            props.users.map((element, index) => (
-            <div
-              key={element.id}
-              className="card-element"
-              ref={div => (cards[index] = [element, div])}
-              style={{ left: 150 * index}}
-            >
-                <img src={testAvatar} />
-            </div>
-          ))}
+                {// map through the elements
+                props.users.map((element, index) => (
+                    <div
+                    key={element.id}
+                    className="avatar"
+                    ref={div => (cards[index] = [element, div])}
+                    >
+                    <p class="textParagraph" ref={p => (textFields[index] = [element, p])}></p>
+                    <img src={testAvatar} style={{width: (100/props.users.length) + "%"}}/>
+                </div>
+            ))}
+          </div>
         </div>
 
 
