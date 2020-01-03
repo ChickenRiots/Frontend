@@ -35,10 +35,11 @@ export default function Seating(props) {
                     tl.repeat(15);
                 } else if(Animate.type.type === "fist"){
                     tl.fromTo(fists[index][1], .2, {opacity: 1, y: 55}, {y: -15, rotation: 0, ease: "bounce"})
-                    tl.to(fists[index][1], .45, {y: 105})
+                    tl.to(fists[index][1], .45, {y: 105 })
                 }  else if(Animate.type.type === "peace"){
                     tl.fromTo(fists2[index][1], 1, {opacity: 1, y: 55}, {y: -15, rotation: -15, ease: "bounce"})
                     tl.to(fists2[index][1], .45, {rotation: 15})
+                    tl.to(fists2[index][1], .45, {y: 105 })
                 }
             }
         })
