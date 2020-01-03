@@ -13,15 +13,9 @@ class YouTubeVideo extends React.PureComponent {
   
   componentDidMount = () => {
 
-    function getURL(url){
-      return new Promise((resolve) =>{
-        resolve(url)
-      })
-    }
 
     this.props.socketio.on('iframe', data => {
-      getURL(data).then(res => {console.log(res) && this.setState({url: res})})
-      .catch(error => console.log(error))
+      const url = data
       
       // On mount, check to see if the API script is already loaded
       
@@ -30,13 +24,13 @@ class YouTubeVideo extends React.PureComponent {
         tag.src = 'https://www.youtube.com/iframe_api';
         
         // onYouTubeIframeAPIReady will load the video after the script is loaded
-        window.onYouTubeIframeAPIReady = this.loadVideo;
+        window.onYouTubeIframeAPIReady = this.loadVideo(url);
         
         const firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         
       } else { // If script is already there, load the video directly
-        this.loadVideo(this.state.url);
+        this.loadVideo(url);
       }
     })
   };
@@ -46,13 +40,23 @@ class YouTubeVideo extends React.PureComponent {
     const { id } = this.props;
     // the Player object is created uniquely based on the id in props
     // const url = this.state.url
-    console.log(url)
-      this.player = new window.YT.Player(`youtube-player-${id}`, {
-        videoId: url ,
-        events: {
-          onReady: this.onPlayerReady,
-        },
-      });
+    // console.log(url)
+    setTimeout(()=>{
+      console.log(url)
+      url !== undefined ? 
+        this.player = new window.YT.Player(`youtube-player-${id}`, {
+          videoId: url ,
+          events: {
+            onReady: this.onPlayerReady,
+          },
+        }): 
+        this.player = new window.YT.Player(`youtube-player-${id}`, {
+          videoId: 'dQw4w9WgXcQ' ,
+          events: {
+            onReady: this.onPlayerReady,
+          },
+        });
+    }, 2000)
   };
 
   
