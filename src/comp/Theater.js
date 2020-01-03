@@ -54,7 +54,7 @@ class YouTubeVideo extends React.PureComponent {
             onReady: this.onPlayerReady,
           },
         });
-    }, 2000)
+    }, 1500)
   };
 
   

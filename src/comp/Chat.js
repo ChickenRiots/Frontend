@@ -7,10 +7,8 @@ import nameList from './nameList'
 export default function Chat(props) {
 
     //CREATES USERS NAME
-    const randomName =  nameList[Math.floor(Math.random() * nameList.length)]
-    const [Username, setUsername] = useState(randomName)
-
-    const room = 'bear'
+    const randomName =  nameList[Math.floor(Math.random() * nameList.length)];
+    const [Username, setUsername] = useState(randomName);
 
     const [Typing, setTyping] = useState(false)
 

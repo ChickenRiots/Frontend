@@ -44,6 +44,9 @@ function App() {
     e.preventDefault();
     setSearched(true);
     console.log('link, sink',Link, SyncedV)
+    if(Link === SyncedV){
+      return 'Already Synced'
+    } else{ setLink(SyncedV) }
   }
 
 useEffect(() => {
