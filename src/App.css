@@ -49,7 +49,7 @@
 .theater{
   width: 110vw;
   margin: 2%;
-
+  z-index: -99;
 }
 
 .icon{
@@ -103,7 +103,7 @@
 
 .avatar{
   display: flex;
-
+  z-index: 999;
 }
 
 .avatarImage{
