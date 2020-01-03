@@ -56,7 +56,7 @@ return (
       </div>
 
     </div>
-    <Seating socketio={socketio}/>
+      <Seating socketio={socketio} users={UserData}/>
   </>
   );
 }
