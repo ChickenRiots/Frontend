@@ -1,4 +1,5 @@
 import React , {useState, useEffect} from 'react';
+import Riot from '../images/chickenriot.png'
 
 import './chat.css'
 
@@ -56,25 +57,36 @@ export default function Chat(props) {
         setUsername(e.target.value)
     }
 
+    let now = Date.now();
+
     return (
     <div className="chat-box" >
+            <img src={Riot} alt="Chicken Riot Logo" className="logo" />
         <div className="messages">
-        {Messages === null || Messages === undefined || Messages.length === 0 ? "Yell something!" : Messages.map((message, i) => <p key={i}>{message}</p>)}<br/>
-        </div>....
-        <form id="form" onSubmit={e => handleSubmit(e)}>
+            <div className="inner-text-box">
+            {Messages === null || Messages === undefined || Messages.length === 0 ? 
+                <p className="txt-message">Welcome to chat! Please Leave a message. </p>
+                : Messages.map((message, i) => 
+                    <p className="txt-message" key={i}> 
+                        <span className="usr-chat-name">{message.split(':')[0]}</span> | {message.split(':')[1]}</p>)} </div>
+                        <br/>
+        </div>
+            <label >Username</label><br/>
             <input
+                className="user-input"
+                placeholder={Username}
+                name="username"
+                value={Username}
+                onChange={e => handleUsername(e)} />
+        <form id="form" onSubmit={e => handleSubmit(e)}><br/>
+            <input
+            className="mess-input"
                 placeholder="Send a message..." 
                 name="message"
                 value={Input}
                 onChange={e => handleChange(e)}></input>
-            <button type="button" onClick={e => handleSubmit(e)}>send</button>
-        </form><br/>
-        <label>Username</label><br/>
-        <input
-            placeholder={Username}
-            name="username"
-            value={Username}
-            onChange={e => handleUsername(e)} />
+            <button type="button" onClick={e => handleSubmit(e)} className="send-button"> > </button>
+        </form>
     </div>
     )
 }
