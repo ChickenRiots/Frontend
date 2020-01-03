@@ -54,7 +54,6 @@ useEffect(() => {
   socketio.on('sync', syncVideo =>{
     setSyncedV(syncVideo)
   })
-}, [])
 
   socketio.on('client connected', data => setUserData(data))
   socketio.on('userId', data => setUserId(data))
