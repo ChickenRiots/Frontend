@@ -4,12 +4,19 @@ import fist from '../images/fist.png'
 import peace from '../images/peace.png'
 import { TimelineLite } from "gsap/all";
 
+import UIFx from 'uifx'
+import mp3File from '../images/airhorn.mp3';
+
 export default function Seating(props) {
     const [Users, setUsers] = useState()
     const [Animate, setAnimate] = useState([])
+
     const cards = []
     const fists = []
     const fists2 = []
+
+    var audioElement = new Audio(mp3File);
+    //const airhorn = new UIFx({asset: mp3File});
 
     useEffect(() => {
         // listen for message
@@ -40,6 +47,10 @@ export default function Seating(props) {
                     tl.fromTo(fists2[index][1], 1, {opacity: 1, y: 55}, {y: -15, rotation: -15, ease: "bounce"})
                     tl.to(fists2[index][1], .45, {rotation: 15})
                     tl.to(fists2[index][1], .45, {y: 105 })
+                } else if(Animate.type.type === "airhorn"){
+                    audioElement.play();
+                    //console.log(airhorn)
+
                 }
             }
         })
@@ -66,6 +77,10 @@ export default function Seating(props) {
         e.preventDefault();
         props.socketio.emit('animate', props.userId, {type:"peace", value: "peace"});
     }
+    const click6 = (e) =>{
+        e.preventDefault();
+        props.socketio.emit('animate', props.userId, {type:"airhorn", value: "airhorn"});
+    }
 
 
     console.log(Animate)
@@ -73,12 +88,12 @@ export default function Seating(props) {
     return (
 
         <div className="seats">
-            
             <div className="icon-box" >
                 <input className="icon" onClick={click} type="submit" value="move"/>
                 <input className="icon" onClick={click3} type="submit" value="move2"/>
                 <input className="icon" onClick={click4} type="submit" value="fist"/>
                 <input className="icon" onClick={click5} type="submit" value="peace"/>
+                <input className="icon" onClick={click6} type="submit" value="airhorn"/>
 
             </div>
             
@@ -100,6 +115,7 @@ export default function Seating(props) {
                 </>
             ))}
           </div>
+          
         </div>
 
 

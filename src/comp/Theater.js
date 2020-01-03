@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 
@@ -42,9 +43,9 @@ class YouTubeVideo extends React.PureComponent {
     setTimeout(()=>{
       url !== undefined ? 
         this.player = new window.YT.Player(`youtube-player-${id}`, {
+          videoId: url ,
           height: '540',
           width: '960',
-          videoId: url ,
           events: {
             onReady: this.onPlayerReady,
           },
@@ -67,8 +68,8 @@ class YouTubeVideo extends React.PureComponent {
   render = () => {
     const { id } = this.props;
     return (
-      <div className="display-window">
-        <div className="video" id={`youtube-player-${id}`} />
+      <div>
+        <div id={`youtube-player-${id}`} />
       </div>
     );
   };

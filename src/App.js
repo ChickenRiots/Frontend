@@ -110,7 +110,9 @@ return (
       <button onClick={e => SyncHandle(e)} disabled="true"> sync </button>
     </form>
     <div className="App">
-      <iframe crossorigin="anonymous" className="frame" src={Link}></iframe>
+      <div className="vid">
+        <iframe width="960" height="700" src="https://www.youtube.com/embed/hHW1oY26kxQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
       <div className="chat">
         <Chat  socketio={socketio}/>
       </div>

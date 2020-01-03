@@ -41,7 +41,7 @@
 }
 
 .chat{
-  width: 40vw;
+
   display: flex;
   justify-content: flex-end;
 }
@@ -49,7 +49,7 @@
 .theater{
   width: 110vw;
   margin: 2%;
-  z-index: -99;
+  z-index: 99;
 }
 
 .icon{
@@ -138,4 +138,15 @@
 .search-input{
   width: 30vw;
   padding: 10px;
+}
+
+.vid{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin: 25px 25px 0 0
+}
+
+.hidden{
+  opacity: 0;
 }
