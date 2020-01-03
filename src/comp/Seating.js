@@ -2,12 +2,13 @@ import React , {useState, useEffect} from 'react';
 import testAvatar from '../images/testAvatar.png'
 import fist from '../images/fist.png'
 import peace from '../images/peace.png'
-import { TimelineLite } from "gsap/all";
+import { TimelineLite, gsap, CSSPlugin } from "gsap/all";
 
 import UIFx from 'uifx'
 import mp3File from '../images/airhorn.mp3';
 
 export default function Seating(props) {
+    gsap.registerPlugin(CSSPlugin)
     const [Users, setUsers] = useState()
     const [Animate, setAnimate] = useState([])
 
