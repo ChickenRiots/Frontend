@@ -30,14 +30,15 @@ export default function Chat(props) {
             console.log(msg)
             let newMessage = await msg 
             setMessages([...Messages , newMessage]);
+            console.log(Messages);
         })
    
-    }, [Messages, Typing])
+    })
 
     const handleChange = (e) =>{
         e.preventDefault();
         props.socketio.emit('typing');
-        setInput(e.target.value)
+        setInput(e.target.value);
     }
 
     const handleSubmit = (e) =>{
@@ -47,7 +48,8 @@ export default function Chat(props) {
             alert('Please enter a message!'); 
             return null;
         }
-        props.socketio.emit('chat message',  Username, Input , room );
+        props.socketio.emit('chat message',Username, Input, function(data) {
+            console.log(data)});
         setInput('');
     }
 
@@ -59,7 +61,7 @@ export default function Chat(props) {
     return (
     <div className="chat-box" >
         <div className="messages">
-        {Messages === null || Messages === undefined ? null : Messages.map((message, i) => <ul key={i}>{message}</ul>)}<br/>
+        {Messages === null || Messages === undefined || Messages.length === 0 ? "Yell something!" : Messages.map((message, i) => <p key={i}>{message}</p>)}<br/>
         </div>....
         <form id="form" onSubmit={e => handleSubmit(e)}>
             <input

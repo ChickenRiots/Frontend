@@ -11,7 +11,7 @@ const nameList = [
     'THERooster',
     'Spectator00',
     'superuserdont',
-    'passablequit',
+    'passablequit'
     
 ]
 
