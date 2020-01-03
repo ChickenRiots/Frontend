@@ -25,7 +25,8 @@ function App() {
   const [Searched, setSearched] = useState(false)
 
   // synced video
-  const [SyncedV, setSyncedV] = useState([])
+  const [SyncedV, setSyncedV] = useState([]);
+  const [SYNCED, setSYNCED] = useState(false)
 
   //link submission functions
   const handleChange = e =>{
@@ -33,24 +34,24 @@ function App() {
     setLink(e.target.value)
   }
 
-  // creates the video
+  // creates the video τνΠ
   const handleSubmit = e =>{
     e.preventDefault();
-    socketio.emit( 'iframe' ,  Link);
+    console.log(Link)
+    socketio.emit( 'iframe' ,  Link.toString());
     // when serach is submitted then the html decided if its youtube or not
     setSearched(true)
   }
-  // SYNC BUTTON
+  // SYNC BUTTON   (ノ｀Д)ノo  w  (ノ｀Д)ノo
   const SyncHandle= e =>{
     e.preventDefault();
-    socketio.emit( 'sync', () => {});
-    socketio.emit('iframe', SyncedV);
-    setSearched(true);
-    console.log('link, sink',Link, SyncedV)
-    if(Link === SyncedV){
-      return 'Already Synced'
-      // Link becomes Sync video for everyone to use
-    } else{ setLink(SyncedV) }
+    socketio.emit( 'sync', SyncedV.toString());
+    
+    console.log('link, sink', Link , SyncedV.toString());
+    
+    setLink(SyncedV)
+
+    handleSubmit(e);
   }
 
 useEffect(() => {
@@ -67,7 +68,6 @@ useEffect(() => {
   socketio.on('userId', data => setUserId(data))
 }, [])
 
-console.log(UserId)
 if(Searched){
 return (
   <>
@@ -80,7 +80,7 @@ return (
       <button onSubmit={e => handleSubmit(e)}> Search </button>
     </form>
     <div className="App">
-      {Link.includes('youtube') ? 
+      {Link != undefined &&  Link.includes('youtube')  ?
       <div className="theater"> 
         <Theater socketio={socketio} Link={Link}/>
       </div>:
