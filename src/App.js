@@ -53,6 +53,9 @@ return (
       <div className="chat">
         <Chat  socketio={socketio}/>
       </div>
+      <div><object data="https://blogs.claritycon.com/" width="400" height="300" type="text/html">
+    Alternative Content
+      </object></div>
     </div>
   </>
   );
