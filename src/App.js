@@ -7,7 +7,7 @@ import io from 'socket.io-client';
 import Chat from './comp/Chat'
 import Theater from './comp/Theater';
 import Seating from './comp/Seating';
-// https://chickenriot.herokuapp.com/ https://superchatt.herokuapp.com/
+//MAIN SERVER: https://chickenriot.herokuapp.com/ TEST:https://superchatt.herokuapp.com/
 let socketio = io('https://chickenriot.herokuapp.com/');
 
 function App() {
@@ -33,32 +33,37 @@ function App() {
     setLink(e.target.value)
   }
 
+  // creates the video
   const handleSubmit = e =>{
     e.preventDefault();
     socketio.emit( 'iframe' ,  Link);
     // when serach is submitted then the html decided if its youtube or not
     setSearched(true)
   }
-
+  // SYNC BUTTON
   const SyncHandle= e =>{
     e.preventDefault();
+    socketio.emit( 'sync', () => {});
+    socketio.emit('iframe', SyncedV);
     setSearched(true);
     console.log('link, sink',Link, SyncedV)
     if(Link === SyncedV){
       return 'Already Synced'
+      // Link becomes Sync video for everyone to use
     } else{ setLink(SyncedV) }
   }
 
 useEffect(() => {
+  // INIT CONNECT
   socketio.emit('client connected');
   // create random room function later
   socketio.emit('room', 'new room')
+  // COLLECT CONNECTIONS
   socketio.on('client connected', data => setUserData(data) )
+  // VIDEO SYNC SOCKET
   socketio.on('sync', syncVideo =>{
     setSyncedV(syncVideo)
   })
-
-  socketio.on('client connected', data => setUserData(data))
   socketio.on('userId', data => setUserId(data))
 }, [])
 
