@@ -6,6 +6,7 @@ import io from 'socket.io-client';
 
 import Chat from './comp/Chat'
 import Theater from './comp/Theater';
+import Seating from './comp/Seating';
 // https://chickenriot.herokuapp.com/ https://superchatt.herokuapp.com/
 let socketio = io('https://chickenriot.herokuapp.com/');
 
@@ -51,9 +52,11 @@ return (
       </div>:
       <iframe src={Link}></iframe>}
       <div className="chat">
-        <Chat  socketio={socketio}/>
+        <Chat socketio={socketio}/>
       </div>
+
     </div>
+    <Seating socketio={socketio}/>
   </>
   );
 }
