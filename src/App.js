@@ -25,8 +25,7 @@ function App() {
 
   const handleSubmit = e =>{
     e.preventDefault();
-    let data = Link
-    socketio.emit( 'iframe' ,  data)
+    socketio.emit( 'iframe' ,  Link);
   }
 
 useEffect(() => {
@@ -39,17 +38,22 @@ useEffect(() => {
 console.log(UserData)
 return (
   <>
-      <input
+    <form onSubmit={e => handleSubmit(e)}>
+    <input
         placeholder="paste a link here to start sharing!"
         name="link"
-        onSubmit={e => handleSubmit(e)}
-        onChange={e => handleChange(e)} />
+        onChange={e => handleChange(e)} 
+        />
+      <button onSubmit={e => handleSubmit(e)}> Search </button>
+    </form>
     <div className="App">
+
       {Link.includes('youtube') ? 
       <div className="theater"> 
-        <Theater socketio={socketio} />
+        <Theater socketio={socketio} Link={Link}/>
       </div>:
-      <iframe src={Link}></iframe>}
+      <iframe crossorigin="anonymous" className="frame" src={Link}></iframe>}
+
       <div className="chat">
         <Chat  socketio={socketio}/>
       </div>
