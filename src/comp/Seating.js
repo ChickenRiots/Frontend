@@ -33,11 +33,11 @@ export default function Seating(props) {
             console.log(Animate)
             if(card[0] === Animate.id){
                 let tl = new TimelineLite()
-                if(Animate.type.type === "mosh"){
+                if(Animate.type.type === "move"){
                     tl.to(card[1], 0.25, {x: 8, ease: "bounce"})
                     tl.to(card[1], 0.45, {x: -8, ease: "bounce"})
                     tl.repeat(15);
-                } else if(Animate.type.type === "mosh2"){
+                } else if(Animate.type.type === "move2"){
                     tl.to(card[1], 0.25, {y: 8, ease: "bounce"})
                     tl.to(card[1], 0.45, {y: -8, ease: "bounce"})
                     tl.repeat(15);
@@ -52,7 +52,13 @@ export default function Seating(props) {
                     audioElement.play();
                     //console.log(airhorn)
 
-                }
+                } else if(Animate.type.type === "mosh"){
+                    tl.to(card[1], .25, {x: -55, rotation: 25})
+                    tl.to(card[1], .25, {x: 55, rotation: -25})
+                    tl.to(card[1], .25, {x: -55, rotation: 25})
+                    tl.to(card[1], .25, {x: 55, rotation: -25})
+                    tl.repeat(5)
+                } 
             }
         })
     }, [Animate])
@@ -60,12 +66,12 @@ export default function Seating(props) {
     //move up down
     const click = (e) =>{
         e.preventDefault();
-        props.socketio.emit('animate', props.userId, {type:"mosh", value: "<>"});
+        props.socketio.emit('animate', props.userId, {type:"move", value: "<>"});
     }
     //move up down
     const click3 = (e) =>{
         e.preventDefault();
-        props.socketio.emit('animate', props.userId, {type:"mosh2", value: "^"});
+        props.socketio.emit('animate', props.userId, {type:"move2", value: "^"});
     }
 
     //raise fist
@@ -82,7 +88,10 @@ export default function Seating(props) {
         e.preventDefault();
         props.socketio.emit('animate', props.userId, {type:"airhorn", value: "airhorn"});
     }
-
+    const click7 = (e) =>{
+        e.preventDefault();
+        props.socketio.emit('animate', props.userId, {type:"mosh", value: "mosh"});
+    }
 
     console.log(Animate)
 
@@ -92,6 +101,7 @@ export default function Seating(props) {
             <div className="icon-box" >
                 <input className="icon" onClick={click} type="submit" value="move"/>
                 <input className="icon" onClick={click3} type="submit" value="move2"/>
+                <input className="icon" onClick={click7} type="submit" value="mosh"/>
                 <input className="icon" onClick={click4} type="submit" value="fist"/>
                 <input className="icon" onClick={click5} type="submit" value="peace"/>
                 <input className="icon" onClick={click6} type="submit" value="airhorn"/>
